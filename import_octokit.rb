@@ -30,38 +30,54 @@ user.login
 
 repo = get_input('Enter repo (owner/repo_name) >')
 
-Issue = Struct.new(:title, :body, :labels, :comments)
+Issue = Struct.new(:title, :body, :labels, :comments, :tasks)
+Task = Struct.new(:desc, :status)
 issues = Array.new
 
 CSV.foreach issues_csv, headers: true do |row|
-	labels = [row['Story Type']]
-	labels << row['Labels'].split(',') unless row['Labels'].nil?
-	# lol let's hack around the duplicate column names from pivotal tracker
-	comments_col = row.index('Comment')
-	has_comments = !row['Comment', comments_col].nil?
-	comments = []
-	while has_comments do
-		comments << row['Comment', comments_col]
-		comments_col += 1
-		has_comments = !row['Comment', comments_col].nil?
-	end
-	issues << Issue.new(row['Story'], row['Description'], labels, comments)
-end
+  labels = [row['Type']]
+  labels << row['Labels'].split(',') unless row['Labels'].nil?
+  # lol let's hack around the duplicate column names from pivotal tracker
+  comments_col = row.index('Comment')
+  has_comments = !comments_col.nil?
+  comments = []
+  while has_comments do
+    comments << row['Comment', comments_col]
+    comments_col += 1
+    has_comments = !row['Comment', comments_col].nil?
+  end
 
-unique_labels = issues.map{ |i| i.labels }.flatten.map{|j| j.strip}.uniq
+  task_col = row.index('Task')
+  has_tasks = !task_col.nil?
+  tasks = []
+  while has_tasks do
+    status = row['Task Status', task_col].eql?('not complete') ? 'x' : ' '
+    tasks << Task.new(row['Task', task_col], status)
+    task_col += 2 # accommodate 'Task Status'
+    has_tasks = !row['Task', task_col].nil?
+  end
+
+  issues << Issue.new(row['Title'], row['Description'], labels, comments, tasks)
+end
+unique_labels = issues.map{ |i| i.labels }.flatten.map{|j| j.strip unless j.nil?}.uniq
 puts "adding labels: #{unique_labels.to_s}"
 unique_labels.each do |l|
-	begin
-		#client.add_label(repo, l, ISSUE_COLORS.sample)
-	rescue Octokit::UnprocessableEntity => e
-		puts "Unable to add #{l} as a label. Reason: #{e.errors.first[:code]}"
-	end
+  begin
+    client.add_label(repo, l, ISSUE_COLORS.sample) unless l.nil?
+  rescue Octokit::UnprocessableEntity => e
+    puts "Unable to add #{l} as a label. Reason: #{e.errors.first[:code]}"
+  end
 end
 
 issues.each do |issue|
-	puts "creating issue '#{issue.title}'"
-	issue_number = client.create_issue(repo, issue.title, issue.body, {:labels => issue.labels.join(',')}).number
-	issue.comments.each do |comment|
-		client.add_comment(repo, issue_number, comment)
-	end
+  puts "creating issue '#{issue.title}'"
+  issue.tasks.each do |task|
+    issue.body << "\n - [#{task.status}] #{task.desc}"
+  end
+  
+  issue_number = client.create_issue(repo, issue.title, issue.body, {:labels => issue.labels.join(',')}).number
+  issue.comments.each do |comment|
+    puts "add comment #{comment}"
+    client.add_comment(repo, issue_number, comment)
+  end
 end
