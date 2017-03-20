@@ -9,6 +9,8 @@ To succesfully migrate tickets from PivotalTracker to Github do:
 3. Import all user stories from PivotalTracker to csv file
 4. For importing tickets from csv to repo, run: `ruby import_octokit.rb your-issues.csv` and follow prompts
 
+Auth note: if you have 2FA (or find this convenient), rename `login-example.yaml` to `login.yaml` and use your own values. The personal access token should only require repo access.
+
 I haven't looked at the delete_labels script yet, it could probably use some work.
 
 Original thanks for making these scripts to @robotarmy and his gist: https://gist.github.com/2257596

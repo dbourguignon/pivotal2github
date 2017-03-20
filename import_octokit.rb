@@ -3,6 +3,7 @@
 require 'OctoKit'
 require 'CSV'
 require 'highline/import'
+require 'yaml'
 
 # because github didn't display my random colors
 ISSUE_COLORS = ['d4c5f9','e11d21','eb6420','fbca04','009800','006b75','207de5',
@@ -15,8 +16,10 @@ end
 
 issues_csv = ARGV.shift or raise "Enter Filepath to CSV as ARG1"
 
-user = get_input('Enter Username >')
-password = get_input('Enter Password >', '*')
+credentials = YAML.load_file('login.yaml') if File.exists?('login.yaml')
+
+user = credentials.nil? ? get_input('Enter Username >') : credentials['USERNAME']
+password = credentials.nil? ? get_input('Enter Password >', '*') : credentials['PASSWORD']
 
 client = Octokit::Client.new \
 	:login => user,
