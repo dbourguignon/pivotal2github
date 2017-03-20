@@ -59,6 +59,7 @@ CSV.foreach issues_csv, headers: true do |row|
 
   issues << Issue.new(row['Title'], row['Description'], labels, comments, tasks)
 end
+
 unique_labels = issues.map{ |i| i.labels }.flatten.map{|j| j.strip unless j.nil?}.uniq
 puts "adding labels: #{unique_labels.to_s}"
 unique_labels.each do |l|
@@ -77,7 +78,6 @@ issues.each do |issue|
   
   issue_number = client.create_issue(repo, issue.title, issue.body, {:labels => issue.labels.join(',')}).number
   issue.comments.each do |comment|
-    puts "add comment #{comment}"
     client.add_comment(repo, issue_number, comment)
   end
 end
