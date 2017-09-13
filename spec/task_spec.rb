@@ -45,7 +45,7 @@ RSpec.describe 'PT::Task class' do
     t = PT::Task.new('A task')
     expect(t).to_not be_nil
     expect(t.completed?).to be_falsey
-    expect(t.to_markdown).to eq('  - [ ] A task')
+    expect(t.to_markdown).to eq('- [ ] A task')
   end
 
   it 'generates appropriate markdown, part 2' do
@@ -53,14 +53,14 @@ RSpec.describe 'PT::Task class' do
     expect(t).to_not be_nil
     t.status = 'completed'
     expect(t.completed?).to be_truthy
-    expect(t.to_markdown).to eq('  - [x] Another task')
+    expect(t.to_markdown).to eq('- [x] Another task')
   end
 
   it 'generates appropriate markdown, part 3' do
     t = PT::Task.new('Another task', true)
     expect(t).to_not be_nil
     expect(t.completed?).to be_falsey
-    expect(t.to_markdown).to eq('  - [ ] __Blocker__: Another task')
+    expect(t.to_markdown).to eq('- [ ] __Blocker__: Another task')
   end
 
   it 'generates appropriate markdown, part 4' do
@@ -68,7 +68,7 @@ RSpec.describe 'PT::Task class' do
     expect(t).to_not be_nil
     t.status = 'completed'
     expect(t.completed?).to be_truthy
-    expect(t.to_markdown).to eq('  - [x] __Blocker__: A task')
+    expect(t.to_markdown).to eq('- [x] __Blocker__: A task')
   end
 
 end

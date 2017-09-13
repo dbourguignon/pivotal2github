@@ -13,7 +13,7 @@ class PT::Task
   end
 
   def to_markdown
-    "  - [#{completed_markdown}] #{text_markdown}"
+    "- [#{completed_markdown}] #{text_markdown}"
   end
 
   def status=(s)
