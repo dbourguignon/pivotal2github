@@ -49,8 +49,7 @@ RSpec.describe 'PT::OwnerList class' do
                             ['Owned By', "Bar Baz "],
                             ['Status', 'Completed']])
     expect(ol).to_not be_nil
-    expect(ol.to_markdown).to eq(
-      "Original owners:\n  - Foo Bar\n  - Bar Baz")
+    expect(ol.to_markdown).to eq("Original owners:\n  - Foo Bar\n  - Bar Baz")
   end
 
 end
