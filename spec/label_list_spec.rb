@@ -1,6 +1,6 @@
 require 'pt/label_list'
 
-RSpec.describe 'LabelList class' do
+RSpec.describe 'PT::LabelList class' do
 
   it 'can be constructed, part 1' do
     ll = PT::LabelList.new({})
