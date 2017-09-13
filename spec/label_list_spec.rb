@@ -23,7 +23,7 @@ RSpec.describe 'LabelList class' do
     expect(ll).to_not be_nil
     expect(ll.labels).to eq(['foo'])
     expect(ll.colors).to_not be_nil
-    expect(ll.colors['foo']).to_not be_nil
+    expect(ll.colors['foo']).to match(/^[[:xdigit:]]{6}$/)
     expect(ll.visited).to eq({})
   end
 
@@ -32,8 +32,8 @@ RSpec.describe 'LabelList class' do
     expect(ll).to_not be_nil
     expect(ll.labels).to eq(['foo', 'bar'])
     expect(ll.colors).to_not be_nil
-    expect(ll.colors['foo']).to_not be_nil
-    expect(ll.colors['bar']).to_not be_nil
+    expect(ll.colors['foo']).to match(/^[[:xdigit:]]{6}$/)
+    expect(ll.colors['bar']).to match(/^[[:xdigit:]]{6}$/)
     expect(ll.visited).to eq({})
   end
 
