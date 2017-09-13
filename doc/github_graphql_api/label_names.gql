@@ -1,0 +1,17 @@
+# Type queries into this side of the screen, and you will 
+# see intelligent typeaheads aware of the current GraphQL type schema, 
+# live syntax, and validation errors highlighted within the text.
+
+# We'll get you started with a simple query showing your username!
+query { 
+  repository(owner: "repo_owner", name: "repo_name") { 
+    labels(first: 15) {
+      edges {
+        node {
+          name
+          color
+        }
+      }
+    }
+  }
+}

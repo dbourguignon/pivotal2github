@@ -1,0 +1,49 @@
+Id
+Title
+Labels
+Iteration
+Iteration Start
+Iteration End
+Type
+Estimate
+Current State
+Created at
+Accepted at
+Deadline
+Requested By
+Description
+URL
+Owned By
+Owned By
+Owned By
+Blocker
+Blocker Status
+Blocker
+Blocker Status
+Blocker
+Blocker Status
+Comment
+Comment
+Comment
+Comment
+Comment
+Comment
+Comment
+Comment
+Comment
+Task
+Task Status
+Task
+Task Status
+Task
+Task Status
+Task
+Task Status
+Task
+Task Status
+Task
+Task Status
+Task
+Task Status
+Task
+Task Status
