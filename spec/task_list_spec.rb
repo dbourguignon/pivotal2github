@@ -171,6 +171,6 @@ RSpec.describe 'PT::TaskList class' do
 
   # TODO
 
-  it 'can post a comment, part 1' do; end
+  it 'can post a comment, part 1', :github_api do; end
 
 end

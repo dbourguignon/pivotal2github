@@ -38,6 +38,6 @@ RSpec.describe 'PT::LabelList class' do
   end
 
   # TODO
-  it 'can send creation requests' do; end
+  it 'can send creation requests', :github_api do; end
 
 end
