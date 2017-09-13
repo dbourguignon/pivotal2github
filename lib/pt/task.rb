@@ -17,14 +17,13 @@ class PT::Task
   end
 
   def status=(s)
-    @status = s.strip.downcase
+    @status = s.to_s.strip.downcase
   end
 
   private
 
   def text_markdown
-    str = blocker ? "__Blocker__: " : ""
-    str + text
+    blocker ? "__Blocker__: #{text}" : text
   end
 
 

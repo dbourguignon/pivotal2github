@@ -41,6 +41,18 @@ RSpec.describe 'PT::Task class' do
     expect(t.completed?).to be_truthy
   end
 
+  it 'can handle nil status' do
+    t = PT::Task.new('a task', true)
+    expect(t).to_not be_nil
+    expect(t.text).to eq('a task')
+    expect(t.blocker).to be_truthy
+    expect(t.status).to eq('not completed')
+    expect(t.completed?).to be_falsey
+    t.status = nil
+    expect(t.status).to eq('')
+    expect(t.completed?).to be_falsey
+  end
+
   it 'generates appropriate markdown, part 1' do
     t = PT::Task.new('A task')
     expect(t).to_not be_nil
