@@ -10,12 +10,13 @@ module PT2GHHelper
     DEFAULT_CREATION_DATE = 'Feb 1, 2015'
     DEFAULT_REQUESTER     = 'Prod Manager'
 
-    attr_reader :csv_data
+    attr_reader :csv_string, :csv_data
 
     def initialize()
       @csv_string = CSV.generate do |csv|
         csv << self.class.headers
         csv << row_01
+        csv << row_02
       end
       @csv_data = CSV.parse(@csv_string, headers: true)
     end
