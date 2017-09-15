@@ -86,8 +86,6 @@ module PT2GHHelper
       row += check_tasks(tasks)
     end
 
-
-
     def self.headers
       [
         'Id',               #   0 
