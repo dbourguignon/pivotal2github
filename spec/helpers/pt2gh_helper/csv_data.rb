@@ -10,27 +10,44 @@ module PT2GHHelper
     DEFAULT_CREATION_DATE = 'Feb 1, 2015'
     DEFAULT_REQUESTER     = 'Prod Manager'
 
-    attr_reader :csv_string, :csv_data
+    attr_reader :csv_string, :csv_data, :rows
 
     def initialize()
+      create_rows
       @csv_string = CSV.generate do |csv|
         csv << self.class.headers
-        csv << row_01
-        csv << row_02
+        rows.each { |r| csv << r }
       end
       @csv_data = CSV.parse(@csv_string, headers: true)
     end
 
-    def row_01
+    def create_rows
+      @rows = [
+        row_00,
+        row_01,
+      ]
+    end
+
+    def row_00
       create_row(
         12345,
         'Story 1',
         labels: 'junk,test',
+        iteration: 50,
+        iteration_start: 'Aug 8, 2017',
+        iteration_end:   'Aug 22, 2017',
+        type: 'feature',
+        estimate: 1,
+        current_state: 'accepted',
+        created_at: 'Aug 1, 2017',
+        accepted_at: 'Aug 21, 2017',
+        deadline: 'Aug 31, 2017',
+        requested_by: 'Dev Manager',
         description: "A description goes here.\n\nSee comments."
       )
     end
 
-    def row_02
+    def row_01
       create_row(
         12346,
         'Story 2',
