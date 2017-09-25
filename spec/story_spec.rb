@@ -30,6 +30,7 @@ RSpec.describe 'PT::Story class' do
 
   it 'can be constructed, part 1' do
     s = check_story_basics(@csv[0])
+    # puts "\n\n#{s.ticket_description}\n\n"
   end
 
   it 'can be constructed, part 2' do

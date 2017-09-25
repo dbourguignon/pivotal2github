@@ -24,6 +24,7 @@ module PT; end
 class PT::Story
 
   attr_reader \
+    :github_id,
     :id,
     :title,
     :iteration,
@@ -55,5 +56,30 @@ class PT::Story
     @description     = row["Description"]
     @url             = row["URL"]
   end
+
+  # def ticket_description
+  #   <<-EOF
+  #   ## Summary
+
+  #   Original ticket:  [PT#{id}](#{url})
+  #   Title: #{title}
+
+  #   Created at: #{created_at}
+  #   Accepted at: #{accepted_at}
+  #   Deadline: #{deadline}
+  #   Requested by: #{requested_by}
+  #   Type: #{type}
+  #   Estimate: #{estimate}
+  #   Current State: #{current_state}
+
+  #   Iteration: #{iteration}
+  #   Iteration start: #{iteration_start}
+  #   Iteration end: #{iteration_end}
+
+  #   ## Description
+
+  #   EOF
+  #     .gsub(/^    /, '') + description
+  # end
 end
 
