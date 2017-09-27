@@ -56,6 +56,29 @@ module PT2GHHelper
       )
     end
 
+    def row_02
+      create_row(
+        12347,
+        'Story 3',
+        labels: 'junk,mail',
+        iteration: 50,
+        iteration_start: 'Aug 8, 2017',
+        iteration_end:   'Aug 22, 2017',
+        type: 'feature',
+        estimate: 1,
+        current_state: 'accepted',
+        created_at: 'Aug 1, 2017',
+        accepted_at: 'Aug 21, 2017',
+        deadline: 'Aug 31, 2017',
+        requested_by: 'Dev Manager',
+        description: "A description goes here.\n\nSee comments.",
+        owners: ['User 1', 'User 2'],
+        blockers: [['Blocker A', 'completed'], ['Blocker B', 'not completed']],
+        comments: ['Comment 1', 'Comment 2'],
+        tasks: [['Task A', 'not completed'], ['Task B', 'completed']]
+      )
+    end
+
     def create_row(
       id,
       title,

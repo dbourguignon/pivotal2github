@@ -1,4 +1,5 @@
 require_relative 'helpers/pt2gh_helper/csv_data'
+require_relative 'helpers/pt2gh_helper/expected_markdown'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
